@@ -13,42 +13,42 @@ to compile pam_twauth.so and copy it to /lib/security/, where PAM modules reside
 Twilio SMS API mandatory data fields like FromNumber, AuthSid and AuthKey must be set in **/etc/twauth.conf** configuration file.
 
 twauth.conf format:
-`
+```
 line 1:FromNumber
 line 2:AuthSid
 line 3:AuthKey
-`
+````
 Spaces or comments are not allowed.
 
 Example:
-`
+```
 +1234567890
 AC03cfd743661f07975fa2f1220c5194cb
 a8fdc205a9f19cc1c7507a60c4f01b13
-`
+```
 
 Set proper owner and permission on the /etc/twauth.conf configuration file:
-`
+```
 chown root:root /etc/twauth.conf
 chmod 0600 /etc/twauth.conf
-`
+```
 
 ToNumber is user specific and must be set in GECOS' telephone field (within /etc/passwd). 
 
 Example:
-`
+```
 john:x:1000:1000:,,+37255121314,:/home/john:/bin/bash
 vasya:x:1001:1001:Vasya Pupkin,,+37255111213,:/home/vasya:/bin/bash
 wolf:x:1002:1002:Tambov Wolf,Yosemite,+37255101112,:/home/wolf:/bin/bash
-`
+```
 
-Make sure that **ChallengeResponseAuthentication** in sshd_config is set to yes
+Make sure that `ChallengeResponseAuthentication` in sshd_config is set to `yes`
 
 ## Enabling
-In the per-application configuration (/etc/pam.d/application) add:
-`
+In the per-application configuration (`/etc/pam.d/application`) add:
+```
 auth	required	pam_twauth.so
-`
+```
 
 ## Disclaimer
 This module was tested on Linux/Debian 8.0. Other Linux flavors and non-Linux systems like Solaris are not verified.
@@ -57,7 +57,7 @@ This module was tested on Linux/Debian 8.0. Other Linux flavors and non-Linux sy
 Make sure or double check:
 
 1. api.twilio.com is accessible from your server (nc -zv api.twilio.com 443)
-1. AuthSid, AuthKey and FromNumber fields in /etc/twauth.confs are correct
+1. AuthSid, AuthKey and FromNumber fields in `/etc/twauth.confs` are correct
 1. ToNumber has been specified for your user in /etc/passwd
 
 ## TODO
